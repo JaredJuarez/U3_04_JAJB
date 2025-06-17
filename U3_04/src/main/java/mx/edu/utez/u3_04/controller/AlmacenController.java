@@ -36,8 +36,8 @@ public class AlmacenController {
         Almacen existente = almacenService.findById(id)
                 .orElseThrow(() -> new RuntimeException("Almacen not found"));
         almacen.setId(id);
-        // Si tienes algún campo como "clave" que no debe cambiar, descomenta y usa:
-        // almacen.setClave(existente.getClave());
+        // Mantener la clave original al actualizar
+        almacen.setClave(existente.getClave());
         return almacenService.save(almacen);
     }
 
