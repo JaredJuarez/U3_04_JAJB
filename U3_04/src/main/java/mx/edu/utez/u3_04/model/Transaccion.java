@@ -1,6 +1,8 @@
 package mx.edu.utez.u3_04.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import java.time.LocalDate;
 
@@ -23,6 +25,8 @@ public class Transaccion {
     private Almacen almacen;
 
     @Column(nullable = false)
+    @NotBlank(message = "El tipo de accion es obligatorio")
+    @Pattern(regexp = "^(?!.*<script).*$", message = "No se permiten etiquetas <script>")
     private String tipo; // "COMPRA" o "RENTA"
 
     @Column(nullable = false)

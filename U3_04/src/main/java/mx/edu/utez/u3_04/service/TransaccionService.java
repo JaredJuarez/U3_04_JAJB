@@ -43,6 +43,10 @@ public class TransaccionService {
             if (!"LIBRE".equalsIgnoreCase(almacen.getEstado())) {
                 throw new RuntimeException("El almacén no está disponible para renta.");
             }
+            // Validar precio de renta
+            if (Double.compare(transaccion.getPrecio(), almacen.getPrecioRenta()) != 0) {
+                throw new RuntimeException("El precio de renta no coincide con el precio establecido para el almacén.");
+            }
             transaccion.setFecha(LocalDate.now());
             transaccion.setFechaInicio(LocalDate.now());
             transaccion.setFechaFin(LocalDate.now().plusDays(30));
@@ -51,6 +55,10 @@ public class TransaccionService {
         } else if ("COMPRA".equalsIgnoreCase(transaccion.getTipo())) {
             if (!"LIBRE".equalsIgnoreCase(almacen.getEstado())) {
                 throw new RuntimeException("El almacén no está disponible para compra.");
+            }
+            // Validar precio de venta
+            if (Double.compare(transaccion.getPrecio(), almacen.getPrecioVenta()) != 0) {
+                throw new RuntimeException("El precio de compra no coincide con el precio establecido para el almacén.");
             }
             transaccion.setFecha(LocalDate.now());
             almacen.setEstado("VENDIDO");
