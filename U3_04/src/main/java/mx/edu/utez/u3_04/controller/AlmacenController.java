@@ -28,6 +28,7 @@ public class AlmacenController {
 
     @PostMapping
     public Almacen create(@Valid @RequestBody Almacen almacen) {
+        almacen.setEstado("LIBRE"); // Siempre inicia como LIBRE
         return almacenService.save(almacen);
     }
 

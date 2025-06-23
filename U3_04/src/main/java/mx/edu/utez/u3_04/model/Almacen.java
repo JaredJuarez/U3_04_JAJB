@@ -2,8 +2,6 @@ package mx.edu.utez.u3_04.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -20,9 +18,9 @@ public class Almacen {
     private double precioRenta;
     private String tamano;
 
+    private String estado; // "LIBRE", "RENTADO", "VENDIDO"
+
     @ManyToOne
     @JoinColumn(name = "cede_id")
     private Cede cede;
-
-    // NO pongas @PrePersist aquí para la clave
 }
